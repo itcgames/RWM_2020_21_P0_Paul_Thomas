@@ -2,6 +2,7 @@
 using UnityEngine.TestTools;
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Specialized;
 
 public class TestSuite
 {
@@ -111,5 +112,22 @@ public class TestSuite
         // 2
         Assert.AreEqual(game.score, 1);
     }
+
+    //Tom Aditional Test
+    [UnityTest]
+    public IEnumerable AsteroidTriggersGameOverOnShipCollision()
+    {
+        game.isGameOver = false;
+        GameObject asteroid = game.GetSpawner().SpawnAsteroid();
+        asteroid.transform.position = Vector3.zero;
+
+        Ship  ship = game.GetShip();
+        ship.transform.position = Vector3.zero;
+
+        yield return new WaitForSeconds(0.1f);
+
+        Assert.True(game.isGameOver);
+    }
+
 
 }
