@@ -89,6 +89,30 @@ public class TestSuite
     }
 
     [UnityTest]
+    public IEnumerator PlayerMovesLeft()
+    {
+
+        //14
+        float initialXPos = game.GetShip().transform.position.x;
+        game.GetShip().MoveLeft();
+        yield return new WaitForSeconds(0.1f);
+        //15
+        Assert.Less(game.GetShip().transform.position.x, initialXPos);
+    }
+
+    [UnityTest]
+    public IEnumerator PlayerMovesRight()
+    {
+
+        //14
+        float initialXPos = game.GetShip().transform.position.x;
+        game.GetShip().MoveRight();
+        yield return new WaitForSeconds(0.1f);
+        //15
+        Assert.Greater(game.GetShip().transform.position.x, initialXPos);
+    }
+
+    [UnityTest]
     public IEnumerator LaserDestroysAsteroid()
     {
         // 1
