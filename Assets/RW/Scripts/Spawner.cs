@@ -36,6 +36,8 @@ public class Spawner : MonoBehaviour
 {
     public List<GameObject> asteroids = new List<GameObject>();
 
+
+
     [SerializeField]
     private GameObject asteroid1;
     [SerializeField]
@@ -44,6 +46,8 @@ public class Spawner : MonoBehaviour
     private GameObject asteroid3;
     [SerializeField]
     private GameObject asteroid4;
+
+
 
     public void BeginSpawning()
     {
@@ -55,6 +59,7 @@ public class Spawner : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
 
         SpawnAsteroid();
+
         StartCoroutine("Spawn");
     }
 
