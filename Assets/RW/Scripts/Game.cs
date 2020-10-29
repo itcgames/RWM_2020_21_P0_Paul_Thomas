@@ -28,6 +28,7 @@
  * THE SOFTWARE.
  */
 
+using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +51,8 @@ public class Game : MonoBehaviour
     private Text titleText;
     [SerializeField]
     private Spawner spawner;
+    [SerializeField]
+    private PowerUpSpawner powerUpSpawner;
 
     private static Game instance;
 
@@ -68,6 +71,7 @@ public class Game : MonoBehaviour
         instance.startGameButton.SetActive(true);
         instance.isGameOver = true;
         instance.spawner.StopSpawning();
+        instance.powerUpSpawner.StopSpawning();
         instance.shipModel.GetComponent<Ship>().Explode();
         instance.gameOverText.enabled = true;
     }
@@ -83,8 +87,10 @@ public class Game : MonoBehaviour
         scoreText.text = "Score: " + score;
         scoreText.enabled = true;
         spawner.BeginSpawning();
+        powerUpSpawner.BeginSpawning();
         shipModel.GetComponent<Ship>().RepairShip();
         spawner.ClearAsteroids();
+        powerUpSpawner.ClearPowerUp();
         gameOverText.enabled = false;
     }
 
@@ -102,5 +108,10 @@ public class Game : MonoBehaviour
     public Spawner GetSpawner()
     {
         return spawner.GetComponent<Spawner>();
+    }
+
+    public PowerUpSpawner GetPowerUpSpawner()
+    {
+        return powerUpSpawner.GetComponent<PowerUpSpawner>();
     }
 }
